@@ -1,10 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import SayHello from './SayHello.jsx';
-import './index.css'
+import State from './State'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <SayHello name="Yulduz"/>
+    <State/>
   </React.StrictMode>,
 )
