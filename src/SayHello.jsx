@@ -1,5 +1,4 @@
 import React from "react";
-import Frame from "./Frame";
 
 class SayHello extends React.Component {
   constructor(props) {
@@ -14,15 +13,14 @@ class SayHello extends React.Component {
   render() {
     const onChange = () => {
       this.setState({title: "Webbrain"})
+      this.setState({age: 30})
     }
     return (
-      <Frame>
         <div>
           <h1>{this.state.title}</h1>
           <button onClick={onChange}>change</button>
           {/* <button onClick={(e) => {onChange(e)}}>Change</button> */}
         </div>
-      </Frame>
     ) 
    
   }
