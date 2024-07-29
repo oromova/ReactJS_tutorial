@@ -1,63 +1,43 @@
-import { useState } from "react";
-import students from "../mock/student";
+import Table from '../components/Table'
+import Navbar from "../components/Navbar";
+import students from '../mock/student';
+import { useReducer, useState } from 'react';
+
 
 export const Root = () => {
-  const [data, setData] = useState(students)
+  // const [data, setData] = useState(students)
+  const [cnt, dispatch] = useReducer((state, action)=>{
+    console.log(state, action);
+    switch (action.type){
+      case 'plus':
+        return state + 1;
+      case "minus":
+        return state - 1;
+        case "amount":
+        return state + action.payload;
+      default: 
+      return state
+    }       // return statega teng
+  }, 1)
 
-  const searchByName = ({ target: { value }}) => {
-    let res = students.filter((student) => student.name.includes(value))
-    setData(res)
-  }
 
-  const searchByTel = ({ target: {value }}) => {
-    let res = students.filter((student) => student.phone.split(' ').join('').includes(value))
-    setData(res)
-  }
+
+  // const onDelete = (id) => {
+  //   let res = data.filter((student) =>
+  //   student.id !== id)
+  //   setData(res)
+  // }
+
   return (
-    <div>
-      <h1>Student List</h1>
-      <input onChange={searchByName} type="text" placeholder="name" />
-      <input onChange={searchByTel} type="text" placeholder="telefon"/>
-      <table border={1} style={{borderCollapse: 'collapse', width: '100%'}}>
-        <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Telefon</th>
-          <th>Age</th>
-          <th>Department</th>
-        </tr>
-        </thead>
-        <tbody>
-          {
-            data.map((std) =>{
-              return(
-               <tr key={std.id}>
-                <td>{std.id}</td>
-                <td>{std.name}</td>
-                <td>{std.phone}</td>
-                <td>{std.age}</td>
-                <td>{std.department}</td>
-              </tr>
-            ); 
-            })
-          }
-        </tbody>
-      </table>
+     <div>
 
-      {/* <h1>Student List</h1>
-      {data.map(([title, list]) => {
-        return <div key={title}>{title}
-        {
-          list.map((lst)=>{
-            return(
-
-            )
-          })
-        }
-        </div>
-      })} */}
-    </div>
+      <h1>CNT: {cnt}</h1>
+      <button onClick={() => dispatch({type: 'plus'})}>plus</button>
+      <button onClick={() => dispatch({type: 'minus'})}>minus</button>
+      <button onClick={() => dispatch({type: "amount", payload: cnt})}>{cnt}</button>
+    {/*  <Navbar length={data.length}></Navbar>
+      <Table data={data} onDelete={onDelete}/> */}
+     </div>
   );
 };
 

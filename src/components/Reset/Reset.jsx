@@ -2,7 +2,10 @@ import React from 'react'
 
 export const Reset = () => {
   return (
-    <div>Reset</div>
+    <div>
+     <h1> Reset</h1>
+     
+      </div>
   )
 }
 
