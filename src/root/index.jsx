@@ -5,39 +5,25 @@ import { useReducer, useState } from 'react';
 
 
 export const Root = () => {
-  // const [data, setData] = useState(students)
-  const [cnt, dispatch] = useReducer((state, action)=>{
-    console.log(state, action);
-    switch (action.type){
-      case 'plus':
-        return state + 1;
-      case "minus":
-        return state - 1;
-        case "amount":
-        return state + action.payload;
-      default: 
-      return state
-    }       // return statega teng
-  }, 1)
+ 
+const [state, setState] = useState(Number(localStorage.getItem('count') || 1))
 
-
-
-  // const onDelete = (id) => {
-  //   let res = data.filter((student) =>
-  //   student.id !== id)
-  //   setData(res)
-  // }
-
+const onPlus = () => {
+  setState(state+1)
+  localStorage.setItem('count', state+1)
+}
+const onMinus = () => {
+  setState(state+1)
+  localStorage.setItem('count', state-1)
+}
   return (
-     <div>
-
-      <h1>CNT: {cnt}</h1>
-      <button onClick={() => dispatch({type: 'plus'})}>plus</button>
-      <button onClick={() => dispatch({type: 'minus'})}>minus</button>
-      <button onClick={() => dispatch({type: "amount", payload: cnt})}>{cnt}</button>
-    {/*  <Navbar length={data.length}></Navbar>
-      <Table data={data} onDelete={onDelete}/> */}
-     </div>
+   <div>
+    <h1>State: {state}</h1>
+    <button onClick={onPlus}>+</button>
+    <button onClick={onMinus}>-</button>
+    <button onClick={()=>localStorage.removeItem("count")}>remove</button>
+    <button onClick={()=>localStorage.clear()}>clear</button>
+    </div>
   );
 };
 
